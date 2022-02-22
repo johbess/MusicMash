@@ -1,14 +1,15 @@
 package com.MusicMash.models;
 
 
-import net.minidev.json.JSONObject;
-
-import java.util.List;
-
-
+/**
+ * POJO for an artist holding
+ * an array of albums, a description
+ * and a mbid.
+ */
 public class Artist {
+    private Album[] albums;
+    private String description;
     private String mbid;
-    private JSONObject result;
 
     public Artist(String mbid) {
         this.mbid = mbid;
@@ -22,11 +23,19 @@ public class Artist {
         this.mbid = mbid;
     }
 
-    public JSONObject getResult() {
-        return result;
+    public String getDescription() {
+        return description;
     }
 
-    public void setResult(JSONObject result) {
-        this.result = result;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Album[] getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(Album[] albums) {
+        this.albums = albums;
     }
 }

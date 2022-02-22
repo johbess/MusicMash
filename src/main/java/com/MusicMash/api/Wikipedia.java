@@ -1,13 +1,8 @@
 package com.MusicMash.api;
 
-import java.io.UnsupportedEncodingException;
 import java.net.*;
-
 import org.json.JSONObject;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
-import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package com.MusicMash.apihandlers;
+package com.MusicMash.services;
 
 import com.MusicMash.api.CovertArtArchive;
 import com.MusicMash.api.MusicBrainz;
@@ -13,6 +13,22 @@ import java.util.concurrent.CompletableFuture;
 
 public class RequestHandler {
 
+    /**
+     * Service for querying the mesh of APIs from
+     * MusicBrainz to find all albums of an artist.
+     * Within MusicBrainz we can collect the token
+     * which identifies the Wikipedia URL from
+     * WikiData.
+     *
+     * The service invokes CompletableFutures to
+     * be able to query each respective API in
+     * parallel as there might take time to receive
+     * a response, such as CovertArtArchive where
+     * one request is made for each album.
+     *
+     * @param mbid id for the artist
+     * @return an artist
+     */
     public static JSONObject queryArtist(String mbid) {
         CompletableFuture<JSONArray> albumsFuture = CompletableFuture
                 .supplyAsync(() -> MusicBrainz.queryAlbums(mbid,new RestTemplate()));

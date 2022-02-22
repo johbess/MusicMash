@@ -1,7 +1,9 @@
 package com.MusicMash.api;
 
+import com.MusicMash.exceptionhandlers.ArtistNotFoundException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.client.RestTemplate;
 import java.net.URI;
@@ -17,8 +19,11 @@ public class MusicBrainz {
 
     @Nullable
     public static String queryWikiToken(String mbid, RestTemplate restTemplate) throws URISyntaxException {
-        String response = restTemplate.getForObject(URL+"artist/"+mbid+"?&f_mt=json&inc=url-rels", String.class);
-        return parseToken(response);
+        ResponseEntity<String> response = restTemplate.getForEntity(URL+"artist/"+mbid+"?&f_mt=json&inc=url-rels", String.class);
+        if (response.getStatusCodeValue() == 404) {
+            throw new ArtistNotFoundException(mbid);
+        }
+        return parseToken(response.getBody());
     }
 
     private static JSONArray parseAlbums(String response) {
