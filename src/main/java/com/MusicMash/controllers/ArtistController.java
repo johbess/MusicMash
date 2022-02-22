@@ -19,6 +19,7 @@ public class ArtistController {
      */
     @GetMapping("/artist/{mbid}")
     public Artist one(@PathVariable String mbid) {
+        System.out.println("Current thread: " + Thread.currentThread().getId());
         JSONObject result = RequestHandler.queryArtist(mbid);
         return ModelHandler.loadArtist(result);
     }
